@@ -42,7 +42,7 @@ gulp.task('awspublish.prod', (done: any) => {
 
 ## Details
 
-*  By default all assets will be uploaded to s3 with `public-read` permissions.
+*  By default all assets in `dist/prod` will be uploaded to s3 with `public-read` permissions.
 *  **awsProfile**: The AWS SDK profile to use when uploading to S3 and invalidating CF objects.  See [the AWS SDK config guide](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html)
 *  **patternsToGzip**: `gulp.src` patterns to gzip, relative to the angular-seed `dist/prod` dir. Default: `['**/*.js', '**/*.css', '**/*.html']`
 *  **patternsToOmit**: `gulp.src` patterns to not upload to s3, relative to the angular-seed `dist/prod` dir. By default `dist/prod/**/*` will be uploaded (after gzip).
