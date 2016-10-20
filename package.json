@@ -1,0 +1,18 @@
+{
+  "name": "angular-seed-awspublish-task",
+  "version": "0.0.1",
+  "description": "gulp task plugin for angular-seed that gzips and publishes app to s3 with CloudFront invalidations",
+  "repository": {
+    "url": "https://github.com/doapp-ryanp/angular-seed-awspublish-task"
+  },
+  "author": "Ryan Pendergast <ryan.pendergast@gmail.com>",
+  "homepage": "http://rynop.com",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrent-transform": "~1.0.0",
+    "gulp-awspublish": "~3.3.0",
+    "gulp-cloudfront-invalidate-aws-publish": "~0.2.1",
+    "merge-stream": "~1.0.0"
+  },
+  "dependencies": {}
+}
