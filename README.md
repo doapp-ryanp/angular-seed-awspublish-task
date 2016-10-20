@@ -38,6 +38,8 @@ gulp.task('awspublish.prod', (done: any) => {
 });
 ```
 
+*  Build your Angular app via normal angular-seed process (ex: `npm run build.prod.exp`). Then run your publish task. Ex: `gulp awspublish.prod`
+
 ## Details
 
 *  By default all assets will be uploaded to s3 with `public-read` permissions.
