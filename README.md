@@ -50,4 +50,4 @@ gulp.task('awspublish.prod', (done: any) => {
 
 ## Thanks
 
-[gulp-awspublish](https://github.com/pgherveou/gulp-awspublish/) and [gulp-cloudfront-invalidate-aws-publish](https://github.com/lpender/gulp-cloudfront-invalidate-aws-publish)
+[mgechev/angular-seed](https://github.com/mgechev/angular-seed), [gulp-awspublish](https://github.com/pgherveou/gulp-awspublish/) and [gulp-cloudfront-invalidate-aws-publish](https://github.com/lpender/gulp-cloudfront-invalidate-aws-publish)
