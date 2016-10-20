@@ -25,14 +25,21 @@ export = () => {
     }
   });
 
+  if (!PTC.cf.distribution || !PTC.cf.distribution.trim()) {
+    errMsg = `Missing PUBLISH_TASK_CONFIG.${Config.ENV}.s3.distribution value in project.config.ts`;
+  }
+
   if (errMsg) {
     util.log(util.colors.red(errMsg));
     throw new Error(errMsg);
   }
 
-  //Load PUBLISH_TASK_CONFIG.awsProfile if not already set in ENV or explicity set in SDK options
+  //Load PUBLISH_TASK_CONFIG.awsProfile if not already set in ENV or explicitly set in SDK options
   if (!process.env.AWS_PROFILE && !!PTC.awsProfile && !PTC.s3.credentials) {
     PTC.s3.credentials = new AWS.SharedIniFileCredentials({profile: PTC.awsProfile});
+  }
+  if (!process.env.AWS_PROFILE && !!PTC.awsProfile && !PTC.cf.credentials) {
+    PTC.cf.credentials = new AWS.SharedIniFileCredentials({profile: PTC.awsProfile});
   }
 
   let s3PublishConfig = PTC.s3,
@@ -53,6 +60,7 @@ export = () => {
   util.log('Publishing', util.colors.yellow(distPath));
   return merge(gzip, plain)
     .pipe(parallelize(publisher.publish(headers), 10))
+    .pipe(invalidate(PTC.cf))
     .pipe(awspublish.reporter());
 };
 

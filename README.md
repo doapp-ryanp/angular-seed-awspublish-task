@@ -46,7 +46,7 @@ gulp.task('awspublish.prod', (done: any) => {
 *  **patternsToOmit**: `gulp.src` patterns to not upload to s3, relative to the angular-seed `dist/prod` dir. By default `dist/prod/**/*` will be uploaded (after gzip).
 *  **s3**: The AWSConfig object used to create an aws-sdk S3 client. At a minimum you must specify `bucket`, to define the site bucket. You can find all available options in the []AWS SDK documentation](//@see http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property)
 *  **headers**:  Headers to add to all objects in S3. By default you will get `'Cache-Control': 'max-age=315360000, no-transform, public'`
-*  **cf**: CloudFront distro id must be defined in `cf.distribution`. See [gulp-cloudfront-invalidate-aws-publish](https://github.com/lpender/gulp-cloudfront-invalidate-aws-publish)
+*  **cf**: CloudFront distro id must be defined in `cf.distribution`. This will create CF invalidations for all uploaded resources. See [gulp-cloudfront-invalidate-aws-publish](https://github.com/lpender/gulp-cloudfront-invalidate-aws-publish)
 
 ## Thanks
 
