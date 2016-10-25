@@ -7,7 +7,7 @@ If you would like to learn how to setup an Anuglar2 app on S3+CloudFront with a 
 
 *  Clone this repo, and copy `task/awspublish.ts` your angular-seed projects `tools/tasks/project` dir. Simlinks do not work and are not advised.
 *  Run `npm install --save-dev gulp-awspublish merge-stream concurrent-transform gulp-cloudfront-invalidate-aws-publish`
-*  In your `tools/config/project.config.ts` add the following **before** your `constructor()`:
+*  In your `tools/config/project.config.ts` add the following **before** your `constructor()`. Add another index for each of your stages at the same level as `prod` below:
 ```js
 PUBLISH_TASK_CONFIG: any = {
     prod: {
