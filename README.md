@@ -11,7 +11,7 @@ If you would like to learn how to setup an Anuglar2 app on S3+CloudFront with a 
 ```js
 PUBLISH_TASK_CONFIG: any = {
     prod: {
-      awsProfile: 'alayna-page',  //Can use AWS_PROFILE env var instead (AWS_PROFILE=alayna-page gulp publish.prod)
+      awsProfile: 'alayna-page',  //Can use AWS_PROFILE env var instead (AWS_PROFILE=alayna-page gulp awspublish)
       patternsToGzip: ['**/*.js', '**/*.css', '**/*.html'],
       patternsToOmit: [], //By default won't omit anything (will upload entire dist/prod dir
       s3: {        //@see http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property
