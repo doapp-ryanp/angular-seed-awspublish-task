@@ -26,22 +26,20 @@ PUBLISH_TASK_CONFIG: any = {
     },
   };
 ```
-*  At end of `gulpfile.ts` add an entry for each of your defined stages. Ex:
+*  In your `package.json` add an entry for each of your stages in the `scripts` section:
 
-```js
-// --------------
-// Publish prod
-gulp.task('awspublish.prod', (done: any) => {
-  Config.ENV = 'prod';
-  return runSequence('awspublish',
-    done)
-});
+```json
+"scripts": {
+    "awspublish.prod": "gulp awspublish --color --build-type prod --awspublish-stage prod",
+    "awspublish.staging": "gulp awspublish --color --build-type prod --awspublish-stage staging",    
+}
 ```
 
 *  Build your Angular app via normal angular-seed process (ex: `npm run build.prod.exp`). Then run your publish task. Ex: `gulp awspublish.prod`
 
 ## Details
 
+*  `--awspublish-stage` dictates which stage index of `PUBLISH_TASK_CONFIG` to use.
 *  By default all assets in `dist/prod` will be uploaded to s3 with `public-read` permissions.
 *  **awsProfile**: The AWS SDK profile to use when uploading to S3 and invalidating CF objects.  See [the AWS SDK config guide](http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html)
 *  **patternsToGzip**: `gulp.src` patterns to gzip, relative to the angular-seed `dist/prod` dir. Default: `['**/*.js', '**/*.css', '**/*.html']`
