@@ -21,10 +21,10 @@ export = () => {
     errMsg = `\n* Must define awspublish-stage`;
   }
 
-  if (!Config.PUBLISH_TASK_CONFIG || !Config.PUBLISH_TASK_CONFIG[Config.BUILD_TYPE]) {
+  if (!Config.PUBLISH_TASK_CONFIG || !Config.PUBLISH_TASK_CONFIG[AWS_STAGE]) {
     errMsg += `\n* Missing PUBLISH_TASK_CONFIG.${AWS_STAGE} entry in project.config.ts`;
   }
-  PTC = Config.PUBLISH_TASK_CONFIG[Config.BUILD_TYPE];
+  PTC = Config.PUBLISH_TASK_CONFIG[AWS_STAGE];
 
   ['s3', 'cf'].forEach((idx: string) => {
     if (!PTC[idx]) {
