@@ -1,6 +1,7 @@
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
 
+import { argv } from 'yargs';
 import Config from '../../config';
 
 let AWS = require('aws-sdk'),
@@ -11,22 +12,28 @@ let AWS = require('aws-sdk'),
   distPath = Config.PROD_DEST;
 
 export = () => {
-  let errMsg: string,
+  let errMsg: string = '',
     PTC: any;
 
-  if (!Config.PUBLISH_TASK_CONFIG || !Config.PUBLISH_TASK_CONFIG[Config.ENV]) {
-    errMsg = `Missing PUBLISH_TASK_CONFIG.${Config.ENV} entry in project.config.ts`;
+  const AWS_STAGE = argv['awspublish-stage'];
+
+  if (!AWS_STAGE) {
+    errMsg = `\n* Must define awspublish-stage`;
   }
-  PTC = Config.PUBLISH_TASK_CONFIG[Config.ENV];
+
+  if (!Config.PUBLISH_TASK_CONFIG || !Config.PUBLISH_TASK_CONFIG[Config.BUILD_TYPE]) {
+    errMsg += `\n* Missing PUBLISH_TASK_CONFIG.${AWS_STAGE} entry in project.config.ts`;
+  }
+  PTC = Config.PUBLISH_TASK_CONFIG[Config.BUILD_TYPE];
 
   ['s3', 'cf'].forEach((idx: string) => {
     if (!PTC[idx]) {
-      errMsg = `Missing PUBLISH_TASK_CONFIG.${Config.ENV}.${idx} entry in project.config.ts`;
+      errMsg += `\n* Missing PUBLISH_TASK_CONFIG.${AWS_STAGE}.${idx} entry in project.config.ts`;
     }
   });
 
   if (!PTC.cf.distribution || !PTC.cf.distribution.trim()) {
-    errMsg = `Missing PUBLISH_TASK_CONFIG.${Config.ENV}.s3.distribution value in project.config.ts`;
+    errMsg += `\n* Missing PUBLISH_TASK_CONFIG.${AWS_STAGE}.s3.distribution value in project.config.ts`;
   }
 
   if (errMsg) {
